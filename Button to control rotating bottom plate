@@ -1,0 +1,14 @@
+BottomButton = PushButton(app, toggleLED, text= 'Rotate Bottom', width = 15, height = 3)
+BottomButton.text_size = 36
+
+def bottom_spin():
+    half_step_clockwise(50, 0.005)
+def bottom_stop():
+    pair_off(a1)
+    pair_off(a2)
+    pair_off(b1)
+    pair_off(b2)
+    #put code here to stop the gpio pins
+
+BottomButton.when_clicked = bottom_spin
+BottomButton.when_double_clicked = bottom_stop
