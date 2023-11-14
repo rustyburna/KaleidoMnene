@@ -1,30 +1,53 @@
-
-import guizero
+import guizero, StepperCode, ServoCode, LEDs, camcode, Music, threading
 from guizero import App, PushButton, Slider, Picture, Text
 import RPi.GPIO as GPIO
 from time import sleep
+from picamera import PiCamera
 GPIO.setwarnings(False)
 
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(17, GPIO.OUT)
-#x=.03
-
+x = True
 def exitApp():
   app.destroy()
   GPIO.cleanup()
-    
+
 def toggleLED():
   ledButton.text="LED OFF"
-  for i in range (1,10):
-    GPIO.output(17, GPIO.HIGH)
-    sleep(x)
-    GPIO.output(17, GPIO.LOW)
-    sleep(x)
-  ledButton.text="LED ON"
+  print("test")
+  ledButton.text="LED OFF"
+  LEDs.pattern1
+  #ledButton.text="LED ON"
 
+def Start():
+    threading.Thread(target=Turn).start()
+
+def Turn():
+  global x
+  x = True
+  while x:
+    StepperCode.full_step_clockwise(100, 0.01)
+    if not x:
+      break
+  
+def Stop():
+  threading.Thread(target=Stop1).start()
+
+def Stop1():
+  global x
+  x = False
+  print(x)
+  
+def vid():
+  camcode.Video()
+  
+def pic():
+  camcode.Picture()
+
+def music():
+  Music.BR()
+  
 app = App('KaleidoMnene', bg = "red")
           #width = 160, height = 128)
-#picture = Picture(app, image = "title.gif", align = 'top', width =400, height=200)
+picture = Picture(app, image = "title.gif", align = 'top', width =400, height=200)
 
 ledButton = PushButton(app, toggleLED, text="LED ON")
 #ledButton.text_size = 36
@@ -32,31 +55,27 @@ ledButton = PushButton(app, toggleLED, text="LED ON")
 exitButton = PushButton(app, exitApp, text="Exit", align = 'bottom')
 #exitButton.text_size = 36
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(17, GPIO.OUT)
-p=GPIO.PWM(17, 50)
 
-def serv_ang(deg, t):
-  dc=deg/2
-  print(dc)
-  p.start(dc)
+turnButton = PushButton(app, text = "Turn Servo")
+turnButton.when_clicked = Stop
+turnButton.when_double_clicked = Start
+VideoButon = PushButton(app, vid, text = "Take Video")
 
+PicButton = PushButton(app, pic, text = "Take Picture")
+
+MusicButton = PushButton(app, music, text = "Bops")
 
 def slider_changed(slider_value):
   print(slider_value)
-  serv_ang(int(slider_value), 1)
-
-#print(theta)
+  ServoCode.serv_ang(int(slider_value), 1)
 
 
-slider = Slider(app, start = 15, end = 90, command=slider_changed)
 
+slider = Slider(app, start = 0, end = 90, command=slider_changed)
 
   
 text = Text(app, text="theta")
-#picture = Picture(app, image = "JcC.gif")
-#picture = Picture(app, image = "y.gif")
+picture = Picture(app, image = "JcC.gif")
 
 app.display()
 
