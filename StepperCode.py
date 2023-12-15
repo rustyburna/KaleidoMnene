@@ -1,10 +1,11 @@
 import RPi.GPIO as GPIO
 from time import sleep
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 a1 = 17
 a2 = 27
-b1 = 22
-b2 = 23
+b1 = 23
+b2 = 22
 GPIO.setup(a1, GPIO.OUT)
 GPIO.setup(a2, GPIO.OUT)
 GPIO.setup(b1, GPIO.OUT)
@@ -131,7 +132,7 @@ def bottom_stop():
     pair_off(a2)
     pair_off(b1)
     pair_off(b2)
-#full_step_clockwise(400, 0.008)
+#full_step_clockwise(150, 0.01)
 #full_step_anticlockwise(400, 0.005)
 #half_step_clockwise(400, 0.008)
 #half_step_anticlockwise(400, 0.005)
