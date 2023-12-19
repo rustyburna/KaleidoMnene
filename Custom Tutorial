@@ -1,0 +1,42 @@
+As mentioned, this product is highly customizable. The linearity of the code allows easy function modification for hobbysists. 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+**CUSTOM UI BACKGROUND:
+All the hard work for the GIF procession is done in the ImageLabel function at the start of the NewUI.py script. 
+Scroll down just undeath and notice"lbl.load('JcC.gif'); this is set to load and present a 200x200 GIF that will serve as the UI background file named "JcC.gif." It expects the fileto be located in the same directory as the scripts.
+There are 2 ways to load in a custom .GIF to be your UI bacgrkound:
+1. Simply take a 200x200 .GIF file you like, place it in the code directory, and rename it "JcC.gif"
+2. Place the .GIF file you want to hear in the directory, then copy its file name and insert that in place of "JcC" within the NewUI script. Save the script.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**CUSTOM LED 3 PATTERN:
+Notice in NewUI.py that buttons already wired for LED patterns are defined as such:
+
+def LED1():
+    threading.Thread(target=TEST).start()
+
+def TEST():
+    LED.one()
+    
+led1 = Button(immersion_frame, command = LED1, text="LED 1",font="Quicksand", bg = "#1BCCEF")
+led1.pack()
+
+The button for LED3 has been created, but it has no command within its variable defintion. Create one that threads a reference to a function within LED.py that will be called three()
+
+Go into LED.py. One can see that pattern one is simply defined as a simple, ordered calling of predefined LED functions, while pattern two is more complex. Define three(): and choose which level of pattern complexity you wouuld like to mimic; feel free to reference the existing functions or make your own! Save both scripts.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+**CUSTOM MUSIC:
+Music.py works with PyGame to play music in the UI; this is the function called from the NewUI module. 
+The Music.py script is set to play an audio file referred to as "TestAudio.wav" that it expects to be located in the same directory as the scripts.
+There are 2 ways to load in a custom .wav song to play from your UI:
+1. Simply take a .wav file you like, place it in the code directory, and rename it "TestAudio.wav"
+2. Place the .wav file you want to hear in the directory, then copy its file name and insert that in place of "TestAudio" within the Music.py script. Save the script.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+**CUSTOM MOTOR DIRECTION:
+One can see all the examples of the motor direction functions in the StepperCode.py script, as well as some commented out examples at the bottom with reasonable rotation and sleep times.
+-The particular motor function called is called at the end of the Turn() function within the NewUI.py script, and can be subsititued with whichever verbatim rotation function defined in the StepperCode.py script that the user pleases
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+**CUSTOM LCD TEXT:
+The texttest script features display inputs in two places: inside the start() function and outside of it. 
+-The start() function text is displayed when the UI is running. It is programmed to have the top text line drag by while the bottom one displays, followed by the bottom line flashing. The value of the top line canbe directly edited as the "string" variable, as well as its duration.
+-The text outside the start() function is what is displayed when the start() script times out, and can be directly edited in the code.
